@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Anime</string>
+    <string name="search_wiki">Search</string>
+    <string name="wiki_helper_text">write something</string>
+    <string name="or">OR</string>
+    <string name="random_anime">Random Anime</string>
+    <string name="favourite">favourite</string>
+    <string name="settings">settings</string>
+    <string name="image_description">description</string>
+    <string name="anime_description">anime description</string>
+    <string name="season1">season1</string>
+    <string name="season2">season2</string>
+    <string name="s1">s1</string>
+    <string name="s2">s2</string>
+    <string name="s3">s3</string>
+    <string name="s4">s4</string>
+    <string name="s5">s5</string>
+    <string name="s6">s6</string>
+    <string name="s7">s7</string>
+    <string name="s8">s8</string>
+    <string name="series_description">series description</string>
+    <string name="watch">watch</string>
+</resources>

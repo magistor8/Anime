@@ -11,6 +11,8 @@ import com.magistor8.anime.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
 
+    //2ДЗ старт
+
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 

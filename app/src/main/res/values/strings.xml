@@ -20,4 +20,7 @@
     <string name="s8">s8</string>
     <string name="series_description">series description</string>
     <string name="watch">watch</string>
+    <string name="set_theme">Set theme:</string>
+    <string name="violet">Violet</string>
+    <string name="green">Green</string>
 </resources>

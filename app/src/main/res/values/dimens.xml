@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="zero">0dp</dimen>
+    <dimen name="bottom_sheet_container_peekHeight">50dp</dimen>
+    <dimen name="mainFragment_padding">10dp</dimen>
+    <dimen name="mainFragment_TextInputLayout_marginTop">20dp</dimen>
+    <dimen name="search_group_marginTop">20dp</dimen>
+    <dimen name="search_group_textView_textSize">15sp</dimen>
+    <dimen name="search_group_materialButton_layout_height">40dp</dimen>
+    <dimen name="mainFragment_ScrollView_paddingBottom">50dp</dimen>
+    <dimen name="mainFragment_EquilateralImageViewContainer_width">200dp</dimen>
+    <dimen name="mainFragment_animeDescription_padding">10dp</dimen>
+    <dimen name="mainFragment_watchButton_layout_width">200dp</dimen>
+    <dimen name="mainFragment_watchButton_layout_height">40dp</dimen>
+    <dimen name="settingFragment_padding">10dp</dimen>
+</resources>

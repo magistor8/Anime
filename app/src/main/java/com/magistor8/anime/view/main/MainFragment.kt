@@ -1,4 +1,4 @@
-package com.magistor8.anime
+package com.magistor8.anime.view.main
 
 import android.os.Bundle
 import android.view.*
@@ -21,6 +21,7 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
     }
 
     companion object {

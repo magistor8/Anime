@@ -1,4 +1,4 @@
-package com.magistor8.anime
+package com.magistor8.anime.view.imageview
 
 import android.content.Context
 import android.util.AttributeSet

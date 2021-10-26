@@ -84,6 +84,16 @@
         <item name="chipBackgroundColor">@color/bg_chip_state_list</item>
     </style>
 
-    <dimen name="settingFragment_textView_marginTop">10dp</dimen>
-    <dimen name="mainFragment_watchButton_marginTop">20dp</dimen>
+    <style name="viewPager_textView">
+        <item name="android:textSize">@dimen/viewPager_textView_textSize</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="viewPager_button">
+        <item name="android:layout_marginTop">@dimen/viewPager_button_marginTop</item>
+        <item name="cornerRadius">@dimen/viewPager_button_cornerRadius</item>
+        <item name="android:backgroundTint">@color/purple_alpha</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 </resources>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="NavigationView">
+        <item name="android:backgroundTint">?colorPrimaryVariant</item>
+        <item name="itemTextColor">?itemTextColor</item>
+    </style>
+
+    <style name="mainFragment_TextInputLayout">
+        <item name="android:layout_width">@dimen/zero</item>
+        <item name="android:hint">@string/search_wiki</item>
+        <item name="android:layout_marginTop">@dimen/mainFragment_TextInputLayout_marginTop</item>
+        <item name="android:textColorHint">?mainTextColor</item>
+        <item name="hintTextColor">?mainTextColor</item>
+        <item name="endIconTint">?mainTextColor</item>
+        <item name="endIconMode">custom</item>
+        <item name="endIconDrawable">@drawable/ic_search</item>
+        <item name="counterTextColor">?mainTextColor</item>
+        <item name="helperTextTextColor">?mainTextColor</item>
+    </style>
+
+    <style name="mainFragment_TextInputLayout_TextInputEditText">
+        <item name="android:background">?colorOnPrimary</item>
+    </style>
+
+    <style name="search_group_textView">
+        <item name="android:textColor">?mainTextColor</item>
+        <item name="android:textSize">@dimen/search_group_textView_textSize</item>
+    </style>
+
+    <style name="search_group_materialButton">
+        <item name="android:textColor">?mainTextColor</item>
+        <item name="android:layout_height">@dimen/search_group_materialButton_layout_height</item>
+        <item name="android:text">@string/random_anime</item>
+        <item name="backgroundTint">?colorOnPrimary</item>
+    </style>
+
+    <style name="mainFragment_EquilateralImageView">
+        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:contentDescription">@string/image_description</item>
+        <item name="android:tint">?colorOnPrimary</item>
+        <item name="srcCompat">@drawable/nophoto</item>
+    </style>
+
+    <style name="seasonChip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textColor">?mainTextColor</item>
+        <item name="chipBackgroundColor">@color/bg_chip_state_list</item>
+    </style>
+
+    <style name="seriesChip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textColor">?mainTextColor</item>
+        <item name="chipBackgroundColor">@color/bg_chip_state_list</item>
+    </style>
+
+    <style name="mainFragment_animeDescription">
+        <item name="android:textColor">?mainTextColor</item>
+        <item name="android:padding">@dimen/mainFragment_animeDescription_padding</item>
+    </style>
+
+    <style name="mainFragment_seriesDescription">
+        <item name="android:textColor">?mainTextColor</item>
+        <item name="android:padding">@dimen/mainFragment_animeDescription_padding</item>
+    </style>
+
+    <style name="mainFragment_watchButton">
+        <item name="android:layout_width">@dimen/mainFragment_watchButton_layout_width</item>
+        <item name="android:layout_height">@dimen/mainFragment_watchButton_layout_height</item>
+        <item name="android:text">@string/watch</item>
+        <item name="android:layout_marginTop">@dimen/mainFragment_watchButton_marginTop</item>
+        <item name="android:textColor">?mainTextColor</item>
+        <item name="backgroundTint">?colorOnPrimary</item>
+    </style>
+
+    <style name="settingFragment_textView">
+        <item name="android:layout_marginTop">@dimen/settingFragment_textView_marginTop</item>
+        <item name="android:textColor">?mainTextColor</item>
+    </style>
+
+    <style name="themeChipViolet" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textColor">?mainTextColor</item>
+        <item name="chipBackgroundColor">@color/bg_chip_state_list</item>
+    </style>
+    <style name="themeChipGreen" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textColor">?mainTextColor</item>
+        <item name="chipBackgroundColor">@color/bg_chip_state_list</item>
+    </style>
+
+    <dimen name="settingFragment_textView_marginTop">10dp</dimen>
+    <dimen name="mainFragment_watchButton_marginTop">20dp</dimen>
+</resources>

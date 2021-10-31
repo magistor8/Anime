@@ -17,7 +17,7 @@
 
     <include
         layout="@layout/bottom_sheet_container"
-        android:id="@+id/bottom_sheet_inc"/>
+        android:id="@+id/bottom_sheet_inc" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_app_bar"
@@ -29,6 +29,17 @@
         app:layout_anchor="@+id/bottom_sheet_inc"
         app:layout_anchorGravity="top|center"
         app:navigationIcon="@drawable/ic_hamb"
-        app:navigationIconTint="?mainTextColor"/>
+        app:navigationIconTint="?mainTextColor" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:menu="@menu/menu_bottom_view"
+        app:backgroundTint="?bottomNavigationViewColor"
+        app:itemTextColor="?mainTextColor"
+        app:itemIconTint="?bottomNavigationViewTint"
+        android:visibility="gone"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

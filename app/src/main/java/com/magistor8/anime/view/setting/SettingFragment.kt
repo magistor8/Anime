@@ -4,23 +4,28 @@ import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import com.magistor8.anime.R
 import com.magistor8.anime.databinding.FragmentSettingBinding
+import com.magistor8.anime.view.IS_APP_BAR
 import com.magistor8.anime.view.IS_VIOLET
-import com.magistor8.anime.view.THEME
+import com.magistor8.anime.view.SETTINGS
+
 
 class SettingFragment : Fragment() {
 
     private var _binding: FragmentSettingBinding? = null
     private val binding get() = _binding!!
     private var violetTheme = true
+    private var appBar = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val preferences = requireActivity().getSharedPreferences(THEME, MODE_PRIVATE)
+        val preferences = requireActivity().getSharedPreferences(SETTINGS, MODE_PRIVATE)
         violetTheme = preferences.getBoolean(IS_VIOLET, true)
+        appBar = preferences.getBoolean(IS_APP_BAR, true)
         _binding = FragmentSettingBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -31,21 +36,44 @@ class SettingFragment : Fragment() {
             binding.themeGreen.isChecked = true
             binding.themeViolet.isChecked = false
         }
+        if (!appBar) {
+            binding.bottomView.isChecked = true
+            binding.appBar.isChecked = false
+        }
 
         binding.themeGreen.setOnClickListener {
-            val editor = requireActivity().getSharedPreferences(THEME, MODE_PRIVATE).edit()
-            editor.putBoolean(IS_VIOLET, false)
-            editor.apply()
-            requireActivity().recreate()
+            setTheme(it)
         }
-
         binding.themeViolet.setOnClickListener {
-            val editor = requireActivity().getSharedPreferences(THEME, MODE_PRIVATE).edit()
-            editor.putBoolean(IS_VIOLET, true)
-            editor.apply()
-            requireActivity().recreate()
+            setTheme(it)
+        }
+        binding.appBar.setOnClickListener {
+            setBottomView(it)
+        }
+        binding.bottomView.setOnClickListener {
+            setBottomView(it)
         }
 
+    }
+
+    private fun setBottomView(it: View) {
+        val editor = requireActivity().getSharedPreferences(SETTINGS, MODE_PRIVATE).edit()
+        when(it.id) {
+            R.id.bottomView -> { editor.putBoolean(IS_APP_BAR, false) }
+            R.id.appBar -> { editor.putBoolean(IS_APP_BAR, true) }
+        }
+        editor.apply()
+        requireActivity().recreate()
+    }
+
+    private fun setTheme(it: View) {
+        val editor = requireActivity().getSharedPreferences(SETTINGS, MODE_PRIVATE).edit()
+        when(it.id) {
+            R.id.themeGreen -> { editor.putBoolean(IS_VIOLET, false) }
+            R.id.themeViolet -> { editor.putBoolean(IS_VIOLET, true) }
+        }
+        editor.apply()
+        requireActivity().recreate()
     }
 
     companion object {

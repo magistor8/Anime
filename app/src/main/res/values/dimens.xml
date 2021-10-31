@@ -18,4 +18,5 @@
     <dimen name="settingFragment_textView_marginTop">10dp</dimen>
     <dimen name="mainFragment_watchButton_marginTop">20dp</dimen>
     <dimen name="viewPager_button_cornerRadius">10dp</dimen>
+    <dimen name="settingFragment_textView_bottomStyle_marginTop">25dp</dimen>
 </resources>

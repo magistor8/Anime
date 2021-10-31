@@ -24,4 +24,8 @@
     <string name="violet">Violet</string>
     <string name="green">Green</string>
     <string name="start">START</string>
+    <string name="profile">profile</string>
+    <string name="bottom_style">Bottom style</string>
+    <string name="AppBar">App Bar</string>
+    <string name="BottomView">Bottom View</string>
 </resources>

@@ -14,7 +14,9 @@
         app:endIconCheckable="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:alpha="0"
+        android:clickable="false">
         <com.google.android.material.textfield.TextInputEditText
             style="@style/mainFragment_TextInputLayout_TextInputEditText"
             android:id="@+id/input_edit_text"
@@ -29,7 +31,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="@dimen/search_group_marginTop"
-        app:layout_constraintTop_toBottomOf="@+id/input_layout">
+        app:layout_constraintTop_toBottomOf="@+id/input_layout"
+        android:alpha="0"
+        android:clickable="false">
 
         <TextView
             style="@style/search_group_textView"
@@ -66,7 +70,7 @@
 
             <FrameLayout
                 android:id="@+id/image_container"
-                android:layout_width="@dimen/mainFragment_EquilateralImageViewContainer_width"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -88,8 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/image_container"
-                android:text="@string/anime_description"
-                android:background="@drawable/textlines"/>
+                android:text="@string/anime_description" />
 
 
             <HorizontalScrollView
@@ -98,7 +101,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/textlines"
                 android:scrollbars="none"
-                app:layout_constraintTop_toBottomOf="@+id/anime_description">
+                app:layout_constraintTop_toBottomOf="@+id/anime_description"
+                android:alpha="0"
+                android:clickable="false">
 
                 <com.google.android.material.chip.ChipGroup
                     android:layout_width="wrap_content"
@@ -134,7 +139,9 @@
                 android:layout_height="wrap_content"
                 android:scrollbars="none"
                 android:background="@drawable/textlines"
-                app:layout_constraintTop_toBottomOf="@+id/chip_group_season">
+                app:layout_constraintTop_toBottomOf="@+id/chip_group_season"
+                android:alpha="0"
+                android:clickable="false">
 
                 <com.google.android.material.chip.ChipGroup
                     android:layout_width="wrap_content"
@@ -218,14 +225,18 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/chip_group_series"
                 android:text="@string/series_description"
-                android:background="@drawable/textlines"/>
+                android:background="@drawable/textlines"
+                android:alpha="0"
+                android:clickable="false"/>
 
             <com.google.android.material.button.MaterialButton
                 style="@style/mainFragment_watchButton"
                 android:id="@+id/watch"
                 app:layout_constraintTop_toBottomOf="@+id/series_description"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                android:alpha="0"
+                android:clickable="false"/>
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 

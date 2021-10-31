@@ -13,6 +13,8 @@
         <item name="android:textStyle">bold</item>
         <item name="itemTextColor">?mainTextColor</item>
         <item name="android:navigationBarColor">@color/purple_700</item>
+        <item name="bottomNavigationViewColor">@color/purple_500</item>
+        <item name="bottomNavigationViewTint">@color/bottom_tint_list_violet</item>
         <item name="mainBackground">@drawable/f</item>
         <item name="mainTextColor">@color/white</item>
         <item name="actionMenuTextColor">?mainTextColor</item>
@@ -27,6 +29,8 @@
         <item name="android:statusBarColor">?colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:navigationBarColor">@color/light_700</item>
+        <item name="bottomNavigationViewColor">@color/light_500</item>
+        <item name="bottomNavigationViewTint">@color/bottom_tint_list_green</item>
         <item name="android:actionMenuTextColor">@color/white</item>
         <item name="mainBackground">@drawable/l</item>
         <item name="mainTextColor">@color/black</item>

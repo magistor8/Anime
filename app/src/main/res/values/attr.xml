@@ -2,4 +2,6 @@
 <resources>
     <attr name="mainBackground" format="reference" />
     <attr name="mainTextColor" format="reference" />
+    <attr name="bottomNavigationViewColor" format="reference" />
+    <attr name="bottomNavigationViewTint" format="reference" />
 </resources>

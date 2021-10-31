@@ -69,7 +69,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
-                <com.magistor8.anime.EquilateralImageView
+                <com.magistor8.anime.view.imageview.EquilateralImageView
                     style="@style/mainFragment_EquilateralImageView"
                     android:id="@+id/image_view"
                     android:layout_width="match_parent"

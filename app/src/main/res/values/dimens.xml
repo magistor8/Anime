@@ -13,4 +13,9 @@
     <dimen name="mainFragment_watchButton_layout_width">200dp</dimen>
     <dimen name="mainFragment_watchButton_layout_height">40dp</dimen>
     <dimen name="settingFragment_padding">10dp</dimen>
+    <dimen name="viewPager_button_marginTop">20dp</dimen>
+    <dimen name="viewPager_textView_textSize">28sp</dimen>
+    <dimen name="settingFragment_textView_marginTop">10dp</dimen>
+    <dimen name="mainFragment_watchButton_marginTop">20dp</dimen>
+    <dimen name="viewPager_button_cornerRadius">10dp</dimen>
 </resources>

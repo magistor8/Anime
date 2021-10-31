@@ -1,4 +1,4 @@
-package com.magistor8.anime
+package com.magistor8.anime.view.bottomappbar
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.magistor8.anime.R
 import com.magistor8.anime.databinding.BottomNavigationLayoutBinding
 
 class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {

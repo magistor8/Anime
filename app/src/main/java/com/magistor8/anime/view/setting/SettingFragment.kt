@@ -1,10 +1,13 @@
-package com.magistor8.anime
+package com.magistor8.anime.view.setting
 
 import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.magistor8.anime.databinding.FragmentSettingBinding
+import com.magistor8.anime.view.IS_VIOLET
+import com.magistor8.anime.view.THEME
+
 class SettingFragment : Fragment() {
 
     private var _binding: FragmentSettingBinding? = null

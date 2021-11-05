@@ -1,18 +1,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <item
+        android:id="@+id/bottom_main"
+        android:title="@string/main"
+        android:icon="@drawable/play"
+        android:menuCategory="secondary"/>
+
     <item
         android:id="@+id/bottom_profile"
         android:title="@string/profile"
-        android:icon="@drawable/user" />
+        android:icon="@drawable/user"
+        android:menuCategory="secondary"/>
 
     <item
         android:id="@+id/bottom_fav"
         android:title="@string/favourite"
-        android:icon="@drawable/heart" />
+        android:icon="@drawable/heart"
+        android:menuCategory="secondary"/>
 
     <item
         android:id="@+id/bottom_setting"
         android:title="@string/settings"
-        android:icon="@drawable/settings" />
+        android:icon="@drawable/settings"
+        android:menuCategory="secondary"/>
 </menu>

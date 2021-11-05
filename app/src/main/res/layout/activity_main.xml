@@ -12,6 +12,7 @@
 
     <FrameLayout
         android:id="@+id/container"
+        android:background="?colorOnPrimary"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
@@ -40,6 +41,7 @@
         app:backgroundTint="?bottomNavigationViewColor"
         app:itemTextColor="?mainTextColor"
         app:itemIconTint="?bottomNavigationViewTint"
+        app:labelVisibilityMode="labeled"
         android:visibility="gone"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

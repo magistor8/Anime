@@ -28,4 +28,5 @@
     <string name="bottom_style">Bottom style</string>
     <string name="AppBar">App Bar</string>
     <string name="BottomView">Bottom View</string>
+    <string name="main">view</string>
 </resources>

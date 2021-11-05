@@ -4,6 +4,7 @@ import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.magistor8.anime.R
 import com.magistor8.anime.databinding.FragmentSettingBinding
 import com.magistor8.anime.view.IS_APP_BAR
@@ -32,6 +33,9 @@ class SettingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val bottomView: BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation_view)
+        if (bottomView.selectedItemId != R.id.bottom_setting) bottomView.selectedItemId = R.id.bottom_setting
+
         if (!violetTheme) {
             binding.themeGreen.isChecked = true
             binding.themeViolet.isChecked = false

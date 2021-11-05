@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:padding="@dimen/mainFragment_padding"
     android:background="?mainBackground"
@@ -58,11 +59,10 @@
         app:layout_constraintTop_toBottomOf="@+id/search_group"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <androidx.constraintlayout.motion.widget.MotionLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/general"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layoutDescription="@xml/motion_scene">
+            android:layout_height="wrap_content">
 
             <FrameLayout
                 android:id="@+id/image_container"
@@ -82,15 +82,16 @@
 
             </FrameLayout>
 
+
             <com.google.android.material.textview.MaterialTextView
-                style="@style/mainFragment_animeDescription"
                 android:id="@+id/anime_description"
+                style="@style/mainFragment_animeDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/image_container"
+                android:background="@drawable/textlines"
                 android:text="@string/anime_description"
-                android:background="@drawable/textlines"/>
-
+                app:layout_constraintTop_toBottomOf="@+id/image_container"
+                tools:layout_editor_absoluteX="0dp" />
 
             <HorizontalScrollView
                 android:id="@+id/chip_group_season"
@@ -227,7 +228,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-        </androidx.constraintlayout.motion.widget.MotionLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 

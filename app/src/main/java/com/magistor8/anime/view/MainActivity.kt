@@ -3,6 +3,7 @@ package com.magistor8.anime.view
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -15,14 +16,14 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.magistor8.anime.view.bottomappbar.BottomNavigationDrawerFragment
 import com.magistor8.anime.R
 import com.magistor8.anime.databinding.ActivityMainBinding
-import com.magistor8.anime.view.main.MainFragment
-import com.magistor8.anime.view.setting.SettingFragment
+import com.magistor8.anime.utils.Navigation
 import com.magistor8.anime.view.viewpager.ViewPagerAdapter
 
 const val SETTINGS = "SETTINGS"
 const val IS_VIOLET = "isViolet"
 const val IS_FIRST_LUNCH = "IS_FIRST_LUNCH"
 const val IS_APP_BAR = "IS_APP_BAR"
+const val BOTTOM_VIEW_CURRENT_ID = "BOTTOM_VIEW_CURRENT_ID"
 
 class MainActivity : AppCompatActivity() {
 
@@ -59,8 +60,19 @@ class MainActivity : AppCompatActivity() {
         setBottomAppBar()
 
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction().replace(R.id.container, MainFragment.newInstance(), "Main").commit()
+            Navigation.mainFragment(this, false)
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        outState.putInt(BOTTOM_VIEW_CURRENT_ID, binding.bottomNavigationView.selectedItemId)
+        super.onSaveInstanceState(outState, outPersistentState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        val bottomViewCId = savedInstanceState.getInt(BOTTOM_VIEW_CURRENT_ID)
+        binding.bottomNavigationView.selectedItemId = bottomViewCId
+        super.onRestoreInstanceState(savedInstanceState)
     }
 
     private fun setBottomView() {
@@ -71,10 +83,14 @@ class MainActivity : AppCompatActivity() {
 
             binding.bottomNavigationView.setOnItemSelectedListener {
                 when(it.itemId) {
+                    R.id.bottom_main -> {
+                        Navigation.mainFragment(this, true)
+                        return@setOnItemSelectedListener true
+                    }
                     R.id.bottom_fav -> {return@setOnItemSelectedListener true}
                     R.id.bottom_profile -> {return@setOnItemSelectedListener true}
                     R.id.bottom_setting -> {
-                        settingFragment()
+                        Navigation.settingFragment(this, true)
                         return@setOnItemSelectedListener true
                     }
                     else -> {return@setOnItemSelectedListener true}
@@ -86,16 +102,13 @@ class MainActivity : AppCompatActivity() {
     private fun startView(preferences: SharedPreferences) {
         val startView = preferences.getBoolean(IS_FIRST_LUNCH, true)
         if (startView) {
-            val container: FrameLayout = binding.container
-            val viewPager2: ViewPager2 = binding.viewPager2
-            val bottomAppBar: BottomAppBar = binding.bottomAppBar
-            viewPager2.visibility = View.VISIBLE
-            bottomAppBar.visibility = View.GONE
-            container.visibility = View.GONE
+            binding.viewPager2.visibility = View.VISIBLE
+            binding.bottomAppBar.visibility = View.GONE
+            binding.container.visibility = View.GONE
             val startButtonClickListener = View.OnClickListener {
-                viewPager2.visibility = View.GONE
-                container.visibility = View.VISIBLE
-                bottomAppBar.visibility = View.VISIBLE
+                binding.viewPager2.visibility = View.GONE
+                binding.container.visibility = View.VISIBLE
+                binding.bottomAppBar.visibility = View.VISIBLE
                 val editor = preferences.edit()
                 editor.putBoolean(IS_FIRST_LUNCH, false)
                 editor.apply()
@@ -103,7 +116,7 @@ class MainActivity : AppCompatActivity() {
 
             val viewPagerAdapter = ViewPagerAdapter()
             viewPagerAdapter.listener = startButtonClickListener
-            viewPager2.adapter = viewPagerAdapter
+            binding.viewPager2.adapter = viewPagerAdapter
         }
     }
 
@@ -129,7 +142,7 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.app_bar_fav -> Toast.makeText(this, "Favourite", Toast.LENGTH_SHORT).show()
             R.id.app_bar_setting -> {
-                settingFragment()
+                Navigation.settingFragment(this, true)
             }
             android.R.id.home -> {
                 BottomNavigationDrawerFragment().show(this.supportFragmentManager, "tag")
@@ -138,14 +151,6 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun settingFragment() {
-        with(supportFragmentManager) {
-            if (findFragmentByTag("Setting") == null) {
-                beginTransaction().replace(R.id.container, SettingFragment.newInstance(), "Setting")
-                    .addToBackStack("").commit()
-            }
-        }
-    }
 
     private fun setBottomAppBar() {
         this.setSupportActionBar(binding.bottomAppBar)

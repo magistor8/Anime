@@ -19,4 +19,5 @@
     <dimen name="mainFragment_watchButton_marginTop">20dp</dimen>
     <dimen name="viewPager_button_cornerRadius">10dp</dimen>
     <dimen name="settingFragment_textView_bottomStyle_marginTop">25dp</dimen>
+    <dimen name="fragment_main_recycler_item_padding">10dp</dimen>
 </resources>

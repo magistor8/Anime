@@ -7,11 +7,8 @@ import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.magistor8.anime.view.bottomappbar.BottomNavigationDrawerFragment
 import com.magistor8.anime.R
@@ -24,6 +21,8 @@ const val IS_VIOLET = "isViolet"
 const val IS_FIRST_LUNCH = "IS_FIRST_LUNCH"
 const val IS_APP_BAR = "IS_APP_BAR"
 const val BOTTOM_VIEW_CURRENT_ID = "BOTTOM_VIEW_CURRENT_ID"
+const val SEARCH_RESULT_SHOW = "SEARCH_RESULT_SHOW"
+const val SEARCH_RESULT = "SEARCH_RESULT"
 
 class MainActivity : AppCompatActivity() {
 

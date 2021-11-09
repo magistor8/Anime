@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:padding="@dimen/mainFragment_padding"
+    android:paddingBottom="@dimen/mainFragment_ScrollView_paddingBottom"
     android:background="?mainBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -48,15 +49,20 @@
 
     </LinearLayout>
 
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mainFragmentRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@+id/search_group"
+        tools:visibility="gone"/>
 
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/mainFragment_ScrollView_paddingBottom"
-        app:layout_constraintTop_toBottomOf="@+id/search_group"
+        app:layout_constraintTop_toBottomOf="@+id/mainFragmentRecyclerView"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout

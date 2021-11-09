@@ -20,6 +20,8 @@
 
     <style name="mainFragment_TextInputLayout_TextInputEditText">
         <item name="android:background">?colorOnPrimary</item>
+        <item name="android:imeOptions">actionSearch</item>
+        <item name="android:inputType">text</item>
     </style>
 
     <style name="search_group_textView">
@@ -41,6 +43,13 @@
         <item name="srcCompat">@drawable/nophoto</item>
     </style>
 
+    <style name="mainFragment_recycler_EquilateralImageView">
+        <item name="android:contentDescription">@string/image_description</item>
+        <item name="android:tint">?colorOnPrimary</item>
+        <item name="srcCompat">@drawable/nophoto</item>
+        <item name="android:background">@drawable/corner_outlines</item>
+    </style>
+
     <style name="seasonChip" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="android:textColor">?mainTextColor</item>
         <item name="chipBackgroundColor">@color/bg_chip_state_list</item>
@@ -54,6 +63,23 @@
     <style name="mainFragment_animeDescription">
         <item name="android:textColor">?mainTextColor</item>
         <item name="android:padding">@dimen/mainFragment_animeDescription_padding</item>
+    </style>
+
+    <style name="mainFragment_animeTitle" parent="mainFragment_animeDescription">
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:padding">@dimen/mainFragment_animeItem_padding</item>
+    </style>
+
+    <style name="mainFragment_animeYear" parent="mainFragment_animeDescription">
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">@dimen/mainFragment_animeItem_padding</item>
+    </style>
+
+    <style name="mainFragment_animeSeasons" parent="mainFragment_animeDescription">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:padding">@dimen/mainFragment_animeItem_padding</item>
     </style>
 
     <style name="mainFragment_seriesDescription">
@@ -96,4 +122,7 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+
+
+    <dimen name="mainFragment_animeItem_padding">5dp</dimen>
 </resources>

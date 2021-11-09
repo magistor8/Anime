@@ -29,4 +29,9 @@
     <string name="AppBar">App Bar</string>
     <string name="BottomView">Bottom View</string>
     <string name="main">view</string>
+    <string name="mainFragment_itemYear"><u>1999-2001</u></string>
+    <string name="anime_seasons">4 seasons</string>
+    <string name="test_image1">https://coub-anubis-a.akamaized.net/coub_storage/channel/cw_avatar/f90542a1773/bb47ff764acbf285f584d/profile_pic_new_2x_1607598665_1kzsccl_1588201404_vs.jpg</string>
+    <string name="test_image2">https://img1.ak.crunchyroll.com/i/spire3/7899b8b0ec09d3edd4c34f85878d20d11624464686_large.jpg</string>
+    <string name="test_image3">https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/7e/7eb1b9e4114d7e8b3a7a3782022cec320bd07089_full.jpg</string>
 </resources>

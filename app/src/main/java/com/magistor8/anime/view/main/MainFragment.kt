@@ -17,6 +17,12 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.children
 import androidx.core.view.doOnLayout
 import com.google.android.material.textfield.TextInputLayout
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView.OnEditorActionListener
+import androidx.recyclerview.widget.RecyclerView
+import com.magistor8.anime.domain_model.Data
+import com.magistor8.anime.view.SEARCH_RESULT
+import com.magistor8.anime.view.SEARCH_RESULT_SHOW
 
 
 class MainFragment : Fragment() {
@@ -27,6 +33,11 @@ class MainFragment : Fragment() {
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
+
+    private val adapter = MainFragmentAdapter()
+
+    private var isSearchResult = false
+    private var searchData: ArrayList<Data> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +53,17 @@ class MainFragment : Fragment() {
         val bottomView: BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation_view)
         if (bottomView.selectedItemId != R.id.bottom_main) bottomView.selectedItemId = R.id.bottom_main
 
+        //Адаптер
+        binding.mainFragmentRecyclerView.adapter = adapter
+
+        //Показываем последнее состояние
+        showSavedState(savedInstanceState)
+
+        //Переопределяем кнопку
+        overrideBackKey(view)
+
+        //Лисенер на поиск
+        setSearchListener()
 
         //Размеры
         binding.searchGroup.doOnLayout {
@@ -53,6 +75,94 @@ class MainFragment : Fragment() {
         startWidthImage = requireActivity().resources.getDimension(R.dimen.mainFragment_EquilateralImageViewContainer_width).toInt()
         //Анимация изображения
         setImageAnimation()
+    }
+
+    private fun overrideBackKey(view: View) {
+        view.isFocusableInTouchMode = true
+        view.requestFocus()
+        view.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(p0: View?, p1: Int, p2: KeyEvent?): Boolean {
+                if (p1 == KeyEvent.KEYCODE_BACK && isSearchResult) {
+                    binding.scroll.visibility = View.VISIBLE
+                    binding.mainFragmentRecyclerView.visibility = View.GONE
+                    binding.mainFragmentRecyclerView.layoutParams.height = 0
+                    animShow(binding.scroll)
+                    isSearchResult = false
+                    return true
+                }
+                return false
+            }
+        })
+    }
+
+    private fun showSavedState(savedInstanceState: Bundle?) {
+        if (savedInstanceState != null && savedInstanceState.getBoolean(SEARCH_RESULT_SHOW)) {
+            isSearchResult = true
+            binding.scroll.visibility = View.GONE
+            binding.mainFragmentRecyclerView.layoutParams.height =
+                RecyclerView.LayoutParams.WRAP_CONTENT
+            searchData = savedInstanceState.getParcelableArrayList(SEARCH_RESULT)!!
+            adapter.setData(searchData)
+        } else if (isSearchResult) {
+            binding.mainFragmentRecyclerView.layoutParams.height =
+                RecyclerView.LayoutParams.WRAP_CONTENT
+            binding.scroll.visibility = View.GONE
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(SEARCH_RESULT_SHOW, isSearchResult)
+        outState.putParcelableArrayList(SEARCH_RESULT, searchData)
+    }
+
+    private fun setSearchListener() {
+        binding.inputLayout.setEndIconOnClickListener {
+            performSearch()
+        }
+
+        binding.inputEditText.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                performSearch()
+                return@OnEditorActionListener true
+            }
+            false
+        })
+    }
+
+    private fun performSearch() {
+        //Грузим тестовые данные
+        searchData = arrayListOf(
+            Data("Anime1", 3, arrayListOf(2000, 2002), getString(R.string.test_image1)),
+            Data("Anime2", 6, arrayListOf(1990, 1995), getString(R.string.test_image2)),
+            Data("Anime3", 2, arrayListOf(2010, 2012), getString(R.string.test_image3))
+        )
+        adapter.setData(searchData)
+
+        //Показываем
+        val scrollHeight = binding.scroll.measuredHeight
+        binding.mainFragmentRecyclerView.visibility = View.VISIBLE
+        animHide(binding.scroll)
+        searchResultAnimation(scrollHeight)
+    }
+
+    private fun searchResultAnimation(scrollHeight: Int) {
+        val anim = ValueAnimator.ofInt(binding.mainFragmentRecyclerView.measuredHeight, scrollHeight)
+        anim.addUpdateListener { valueAnimator ->
+            val animatedValue = valueAnimator.animatedValue as Int
+            val layoutParams: ViewGroup.LayoutParams = binding.mainFragmentRecyclerView.layoutParams
+            layoutParams.height = animatedValue
+            binding.mainFragmentRecyclerView.layoutParams = layoutParams
+        }
+        anim.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator?) {
+                super.onAnimationEnd(animation)
+                isSearchResult = true
+            }
+        })
+        anim.interpolator = AccelerateDecelerateInterpolator()
+        anim.duration = 400
+        anim.start()
     }
 
     private fun setImageAnimation() {

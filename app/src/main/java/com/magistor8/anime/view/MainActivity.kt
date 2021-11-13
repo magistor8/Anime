@@ -26,6 +26,8 @@ const val SEARCH_RESULT = "SEARCH_RESULT"
 
 class MainActivity : AppCompatActivity() {
 
+    //ДЗ7 черновик
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private var violetTheme = true

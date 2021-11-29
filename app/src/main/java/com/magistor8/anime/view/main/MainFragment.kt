@@ -21,12 +21,14 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView.OnEditorActionListener
 import androidx.recyclerview.widget.RecyclerView
 import com.magistor8.anime.domain_model.Data
+import com.magistor8.anime.domain_model.getTestData
 import com.magistor8.anime.view.SEARCH_RESULT
 import com.magistor8.anime.view.SEARCH_RESULT_SHOW
 
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), MainView {
 
+    private var startHeightScroll = 0
     private var startWidthImage = 0
     private var startHeightSearch = 0
     private var startHeightSearch2 = 0
@@ -35,9 +37,7 @@ class MainFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val adapter = MainFragmentAdapter()
-
-    private var isSearchResult = false
-    private var searchData: ArrayList<Data> = arrayListOf()
+    private val presenter = MainViewPresenter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,7 +57,7 @@ class MainFragment : Fragment() {
         binding.mainFragmentRecyclerView.adapter = adapter
 
         //Показываем последнее состояние
-        showSavedState(savedInstanceState)
+        presenter.loadSavedState(savedInstanceState)
 
         //Переопределяем кнопку
         overrideBackKey(view)
@@ -72,6 +72,9 @@ class MainFragment : Fragment() {
         binding.inputLayout.doOnLayout {
             startHeightSearch2 = it.measuredHeight
         }
+        binding.scroll.doOnLayout {
+            startHeightScroll = it.measuredHeight
+        }
         startWidthImage = requireActivity().resources.getDimension(R.dimen.mainFragment_EquilateralImageViewContainer_width).toInt()
         //Анимация изображения
         setImageAnimation()
@@ -82,12 +85,12 @@ class MainFragment : Fragment() {
         view.requestFocus()
         view.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(p0: View?, p1: Int, p2: KeyEvent?): Boolean {
-                if (p1 == KeyEvent.KEYCODE_BACK && isSearchResult) {
+                if (p1 == KeyEvent.KEYCODE_BACK && presenter.isSearchResult) {
                     binding.scroll.visibility = View.VISIBLE
                     binding.mainFragmentRecyclerView.visibility = View.GONE
                     binding.mainFragmentRecyclerView.layoutParams.height = 0
                     animShow(binding.scroll)
-                    isSearchResult = false
+                    presenter.isSearchResult = false
                     return true
                 }
                 return false
@@ -95,50 +98,43 @@ class MainFragment : Fragment() {
         })
     }
 
-    private fun showSavedState(savedInstanceState: Bundle?) {
-        if (savedInstanceState != null && savedInstanceState.getBoolean(SEARCH_RESULT_SHOW)) {
-            isSearchResult = true
-            binding.scroll.visibility = View.GONE
-            binding.mainFragmentRecyclerView.layoutParams.height =
-                RecyclerView.LayoutParams.WRAP_CONTENT
-            searchData = savedInstanceState.getParcelableArrayList(SEARCH_RESULT)!!
-            adapter.setData(searchData)
-        } else if (isSearchResult) {
-            binding.mainFragmentRecyclerView.layoutParams.height =
-                RecyclerView.LayoutParams.WRAP_CONTENT
-            binding.scroll.visibility = View.GONE
-        }
+    override fun showSavedStateWithSearchResult(data: ArrayList<Data>) {
+        binding.scroll.visibility = View.GONE
+        binding.mainFragmentRecyclerView.layoutParams.height = startHeightScroll
+        adapter.setData(data)
+    }
+
+    override fun showSavedStateWithoutSearchResult() {
+        binding.mainFragmentRecyclerView.layoutParams.height = startHeightScroll
+        binding.scroll.visibility = View.GONE
+    }
+
+    override fun show() {
+        binding.mainFragmentRecyclerView.visibility = View.GONE
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putBoolean(SEARCH_RESULT_SHOW, isSearchResult)
-        outState.putParcelableArrayList(SEARCH_RESULT, searchData)
+        outState.putBoolean(SEARCH_RESULT_SHOW, presenter.isSearchResult)
+        presenter.putSearchData(outState)
     }
 
     private fun setSearchListener() {
         binding.inputLayout.setEndIconOnClickListener {
-            performSearch()
+            presenter.performSearch(requireContext())
         }
 
         binding.inputEditText.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                performSearch()
+                presenter.performSearch(requireContext())
                 return@OnEditorActionListener true
             }
             false
         })
     }
 
-    private fun performSearch() {
-        //Грузим тестовые данные
-        searchData = arrayListOf(
-            Data("Anime1", 3, arrayListOf(2000, 2002), getString(R.string.test_image1)),
-            Data("Anime2", 6, arrayListOf(1990, 1995), getString(R.string.test_image2)),
-            Data("Anime3", 2, arrayListOf(2010, 2012), getString(R.string.test_image3))
-        )
-        adapter.setData(searchData)
-
+    override fun showSearchResult(data: ArrayList<Data>) {
+        adapter.setData(data)
         //Показываем
         val scrollHeight = binding.scroll.measuredHeight
         binding.mainFragmentRecyclerView.visibility = View.VISIBLE
@@ -157,7 +153,7 @@ class MainFragment : Fragment() {
         anim.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator?) {
                 super.onAnimationEnd(animation)
-                isSearchResult = true
+                presenter.isSearchResult = true
             }
         })
         anim.interpolator = AccelerateDecelerateInterpolator()
@@ -324,6 +320,5 @@ class MainFragment : Fragment() {
     companion object {
         fun newInstance() = MainFragment()
     }
-
 }
 

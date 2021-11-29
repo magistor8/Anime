@@ -12,12 +12,11 @@ import com.magistor8.anime.view.IS_VIOLET
 import com.magistor8.anime.view.SETTINGS
 
 
-class SettingFragment : Fragment() {
+class SettingFragment : Fragment(), SettingView {
 
     private var _binding: FragmentSettingBinding? = null
     private val binding get() = _binding!!
-    private var violetTheme = true
-    private var appBar = true
+    private val presenter = SettingViewPresenter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,8 +24,7 @@ class SettingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val preferences = requireActivity().getSharedPreferences(SETTINGS, MODE_PRIVATE)
-        violetTheme = preferences.getBoolean(IS_VIOLET, true)
-        appBar = preferences.getBoolean(IS_APP_BAR, true)
+        presenter.init(preferences)
         _binding = FragmentSettingBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -36,11 +34,11 @@ class SettingFragment : Fragment() {
         val bottomView: BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation_view)
         if (bottomView.selectedItemId != R.id.bottom_setting) bottomView.selectedItemId = R.id.bottom_setting
 
-        if (!violetTheme) {
+        if (!presenter.violetTheme) {
             binding.themeGreen.isChecked = true
             binding.themeViolet.isChecked = false
         }
-        if (!appBar) {
+        if (!presenter.appBar) {
             binding.bottomView.isChecked = true
             binding.appBar.isChecked = false
         }

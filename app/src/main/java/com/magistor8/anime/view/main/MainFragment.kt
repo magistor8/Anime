@@ -20,7 +20,9 @@ import com.google.android.material.textfield.TextInputLayout
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView.OnEditorActionListener
 import androidx.recyclerview.widget.RecyclerView
-import com.magistor8.anime.domain_model.Data
+import com.magistor8.anime.contracts.MainFragmentContract
+import com.magistor8.anime.contracts.MainFragmentContract.MyViewModel
+import com.magistor8.anime.domain_model.ShortData
 import com.magistor8.anime.view.SEARCH_RESULT
 import com.magistor8.anime.view.SEARCH_RESULT_SHOW
 
@@ -37,7 +39,9 @@ class MainFragment : Fragment() {
     private val adapter = MainFragmentAdapter()
 
     private var isSearchResult = false
-    private var searchData: ArrayList<Data> = arrayListOf()
+    private var searchData: List<ShortData> = arrayListOf()
+
+    private lateinit var viewModel: MyViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,8 +57,14 @@ class MainFragment : Fragment() {
         val bottomView: BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation_view)
         if (bottomView.selectedItemId != R.id.bottom_main) bottomView.selectedItemId = R.id.bottom_main
 
+        //ViewModel
+        viewModel = com.magistor8.anime.viewmodel.MyViewModel()
+
         //Адаптер
         binding.mainFragmentRecyclerView.adapter = adapter
+
+        //ЛайвДата
+        viewModel.viewState.observe(viewLifecycleOwner) { state -> render(state) }
 
         //Показываем последнее состояние
         showSavedState(savedInstanceState)
@@ -75,6 +85,23 @@ class MainFragment : Fragment() {
         startWidthImage = requireActivity().resources.getDimension(R.dimen.mainFragment_EquilateralImageViewContainer_width).toInt()
         //Анимация изображения
         setImageAnimation()
+    }
+
+    private fun render(state: MainFragmentContract.ViewState) {
+        when (state) {
+            is MainFragmentContract.ViewState.SuccesShortData -> showSearchData(state)
+        }
+    }
+
+    private fun showSearchData(state: MainFragmentContract.ViewState.SuccesShortData) {
+        searchData = state.shortData
+        adapter.setData(searchData)
+
+        //Показываем
+        val scrollHeight = binding.scroll.measuredHeight
+        binding.mainFragmentRecyclerView.visibility = View.VISIBLE
+        animHide(binding.scroll)
+        searchResultAnimation(scrollHeight)
     }
 
     private fun overrideBackKey(view: View) {
@@ -113,7 +140,7 @@ class MainFragment : Fragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putBoolean(SEARCH_RESULT_SHOW, isSearchResult)
-        outState.putParcelableArrayList(SEARCH_RESULT, searchData)
+        outState.putParcelableArrayList(SEARCH_RESULT, ArrayList(searchData))
     }
 
     private fun setSearchListener() {
@@ -132,18 +159,7 @@ class MainFragment : Fragment() {
 
     private fun performSearch() {
         //Грузим тестовые данные
-        searchData = arrayListOf(
-            Data("Anime1", 3, arrayListOf(2000, 2002), getString(R.string.test_image1)),
-            Data("Anime2", 6, arrayListOf(1990, 1995), getString(R.string.test_image2)),
-            Data("Anime3", 2, arrayListOf(2010, 2012), getString(R.string.test_image3))
-        )
-        adapter.setData(searchData)
-
-        //Показываем
-        val scrollHeight = binding.scroll.measuredHeight
-        binding.mainFragmentRecyclerView.visibility = View.VISIBLE
-        animHide(binding.scroll)
-        searchResultAnimation(scrollHeight)
+        viewModel.onEvent(MainFragmentContract.Event.LoadTestData)
     }
 
     private fun searchResultAnimation(scrollHeight: Int) {
@@ -319,6 +335,11 @@ class MainFragment : Fragment() {
         animImage.duration = 400
         animImage.start()
         binding.animeDescription.background = null
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 
     companion object {

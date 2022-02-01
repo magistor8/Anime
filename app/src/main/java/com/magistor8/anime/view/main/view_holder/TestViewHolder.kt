@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.google.android.material.textview.MaterialTextView
 import com.magistor8.anime.R
-import com.magistor8.anime.domain_model.Data
+import com.magistor8.anime.domain_model.ShortData
 import com.magistor8.anime.view.imageview.EquilateralImageView
 
 class TestViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    fun bind(data: Data) {
+    fun bind(data: ShortData) {
         if (layoutPosition != RecyclerView.NO_POSITION) {
             itemView.apply {
                 findViewById<EquilateralImageView>(R.id.image_view_item).load(data.image)

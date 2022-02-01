@@ -5,15 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.magistor8.anime.R
-import com.magistor8.anime.domain_model.Data
+import com.magistor8.anime.domain_model.ShortData
 import com.magistor8.anime.view.main.view_holder.TestViewHolder
 
 class MainFragmentAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var data: ArrayList<Data> = arrayListOf()
+    private var data: List<ShortData> = arrayListOf()
 
-    fun setData(input: ArrayList<Data>) {
+    fun setData(input: List<ShortData>) {
         data = input
         notifyDataSetChanged()
     }

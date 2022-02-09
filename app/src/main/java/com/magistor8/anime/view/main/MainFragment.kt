@@ -25,6 +25,7 @@ import com.magistor8.anime.contracts.MainFragmentContract.MyViewModel
 import com.magistor8.anime.domain_model.ShortData
 import com.magistor8.anime.view.SEARCH_RESULT
 import com.magistor8.anime.view.SEARCH_RESULT_SHOW
+import kotlinx.android.synthetic.main.fragment_main.view.*
 
 
 class MainFragment : Fragment() {
@@ -90,18 +91,23 @@ class MainFragment : Fragment() {
     private fun render(state: MainFragmentContract.ViewState) {
         when (state) {
             is MainFragmentContract.ViewState.SuccesShortData -> showSearchData(state)
+            is MainFragmentContract.ViewState.EmptyState -> showSearchWindow()
+            is MainFragmentContract.ViewState.Error -> {}
         }
+    }
+
+    private fun showSearchWindow() {
+        //Показываем
+        adapter.setData(arrayListOf())
+        val scrollHeight = binding.scroll.measuredHeight
+        binding.mainFragmentRecyclerView.visibility = View.VISIBLE
+        animHide(binding.scroll)
+        searchResultAnimation(scrollHeight)
     }
 
     private fun showSearchData(state: MainFragmentContract.ViewState.SuccesShortData) {
         searchData = state.shortData
         adapter.setData(searchData)
-
-        //Показываем
-        val scrollHeight = binding.scroll.measuredHeight
-        binding.mainFragmentRecyclerView.visibility = View.VISIBLE
-        animHide(binding.scroll)
-        searchResultAnimation(scrollHeight)
     }
 
     private fun overrideBackKey(view: View) {
@@ -145,21 +151,21 @@ class MainFragment : Fragment() {
 
     private fun setSearchListener() {
         binding.inputLayout.setEndIconOnClickListener {
-            performSearch()
+            performSearch(binding.inputEditText.editableText.toString())
         }
 
         binding.inputEditText.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                performSearch()
+                performSearch(v.editableText.toString())
                 return@OnEditorActionListener true
             }
             false
         })
     }
 
-    private fun performSearch() {
-        //Грузим тестовые данные
-        viewModel.onEvent(MainFragmentContract.Event.LoadTestData)
+    private fun performSearch(text: String) {
+        //Поиск
+        viewModel.onEvent(MainFragmentContract.Event.LoadData(text))
     }
 
     private fun searchResultAnimation(scrollHeight: Int) {

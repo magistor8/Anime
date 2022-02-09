@@ -8,13 +8,14 @@ interface MainFragmentContract {
     sealed interface ViewState {
         object EmptyState: ViewState
         data class SuccesShortData(val shortData: List<ShortData>) : ViewState
+        data class Error(val error: Throwable): ViewState
     }
     sealed interface Action {
         object FistLaunch: Action
     }
 
     sealed interface Event {
-        object LoadTestData: Event
+        data class LoadData(val q : String): Event
     }
 
     interface MyViewModel {

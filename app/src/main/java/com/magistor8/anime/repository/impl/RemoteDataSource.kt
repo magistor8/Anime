@@ -3,6 +3,7 @@ package com.magistor8.anime.repository.impl
 import com.google.gson.GsonBuilder
 import com.magistor8.anime.BuildConfig
 import com.magistor8.anime.domain_model.AuthDTO
+import com.magistor8.anime.domain_model.SearchDTO
 import com.magistor8.anime.repository.abstr.AniAPI
 import retrofit2.Callback
 import retrofit2.Retrofit
@@ -20,6 +21,10 @@ class RemoteDataSource {
 
     fun getAuth(callback: Callback<AuthDTO>) {
         api.authMe(BuildConfig.ANIAPI_API_KEY).enqueue(callback)
+    }
+
+    fun search(q: String, callback: Callback<SearchDTO>) {
+        api.search(q).enqueue(callback)
     }
 
 }

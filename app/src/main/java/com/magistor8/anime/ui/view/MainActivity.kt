@@ -1,4 +1,4 @@
-package com.magistor8.anime.view
+package com.magistor8.anime.ui.view
 
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
@@ -10,11 +10,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.magistor8.anime.view.bottomappbar.BottomNavigationDrawerFragment
+import com.magistor8.anime.ui.view.bottomappbar.BottomNavigationDrawerFragment
 import com.magistor8.anime.R
 import com.magistor8.anime.databinding.ActivityMainBinding
 import com.magistor8.anime.utils.Navigation
-import com.magistor8.anime.view.viewpager.ViewPagerAdapter
+import com.magistor8.anime.ui.view.viewpager.ViewPagerAdapter
 
 const val SETTINGS = "SETTINGS"
 const val IS_VIOLET = "isViolet"

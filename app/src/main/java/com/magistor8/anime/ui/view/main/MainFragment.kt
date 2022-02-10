@@ -1,4 +1,4 @@
-package com.magistor8.anime.view.main
+package com.magistor8.anime.ui.view.main
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -20,12 +20,11 @@ import com.google.android.material.textfield.TextInputLayout
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView.OnEditorActionListener
 import androidx.recyclerview.widget.RecyclerView
-import com.magistor8.anime.contracts.MainFragmentContract
-import com.magistor8.anime.contracts.MainFragmentContract.MyViewModel
-import com.magistor8.anime.domain_model.ShortData
-import com.magistor8.anime.view.SEARCH_RESULT
-import com.magistor8.anime.view.SEARCH_RESULT_SHOW
-import kotlinx.android.synthetic.main.fragment_main.view.*
+import com.magistor8.anime.ui.view.viewmodel.MainFragmentContract
+import com.magistor8.anime.ui.view.viewmodel.MainFragmentContract.MyViewModel
+import com.magistor8.anime.domain.ShortData
+import com.magistor8.anime.ui.view.SEARCH_RESULT
+import com.magistor8.anime.ui.view.SEARCH_RESULT_SHOW
 
 
 class MainFragment : Fragment() {
@@ -59,7 +58,7 @@ class MainFragment : Fragment() {
         if (bottomView.selectedItemId != R.id.bottom_main) bottomView.selectedItemId = R.id.bottom_main
 
         //ViewModel
-        viewModel = com.magistor8.anime.viewmodel.MyViewModel()
+        viewModel = com.magistor8.anime.ui.view.viewmodel.MyViewModel()
 
         //Адаптер
         binding.mainFragmentRecyclerView.adapter = adapter

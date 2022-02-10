@@ -1,7 +1,8 @@
-package com.magistor8.anime.repository.impl
+package com.magistor8.anime.data
 
-import com.magistor8.anime.domain_model.SearchDTO
-import com.magistor8.anime.repository.abstr.RemoteRepository
+import com.magistor8.anime.data.retrofit.RemoteDataSource
+import com.magistor8.anime.domain.SearchDTO
+import com.magistor8.anime.domain.RemoteRepository
 import retrofit2.Callback
 
 class RemoteRepoImpl (

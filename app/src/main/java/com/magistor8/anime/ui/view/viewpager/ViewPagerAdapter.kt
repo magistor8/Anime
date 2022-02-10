@@ -1,4 +1,4 @@
-package com.magistor8.anime.view.viewpager
+package com.magistor8.anime.ui.view.viewpager
 
 import android.view.LayoutInflater
 import android.view.View

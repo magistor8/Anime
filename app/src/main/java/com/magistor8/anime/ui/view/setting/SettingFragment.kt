@@ -1,4 +1,4 @@
-package com.magistor8.anime.view.setting
+package com.magistor8.anime.ui.view.setting
 
 import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
@@ -7,9 +7,9 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.magistor8.anime.R
 import com.magistor8.anime.databinding.FragmentSettingBinding
-import com.magistor8.anime.view.IS_APP_BAR
-import com.magistor8.anime.view.IS_VIOLET
-import com.magistor8.anime.view.SETTINGS
+import com.magistor8.anime.ui.view.IS_APP_BAR
+import com.magistor8.anime.ui.view.IS_VIOLET
+import com.magistor8.anime.ui.view.SETTINGS
 
 
 class SettingFragment : Fragment() {

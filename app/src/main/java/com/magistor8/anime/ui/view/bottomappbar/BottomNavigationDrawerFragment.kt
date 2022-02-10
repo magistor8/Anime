@@ -1,4 +1,4 @@
-package com.magistor8.anime.view.bottomappbar
+package com.magistor8.anime.ui.view.bottomappbar
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -12,7 +12,7 @@
         android:theme="@style/Violet">
 
         <activity
-            android:name=".view.MainActivity"
+            android:name="com.magistor8.anime.ui.view.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>

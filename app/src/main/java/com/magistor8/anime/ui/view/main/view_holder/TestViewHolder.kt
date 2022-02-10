@@ -1,10 +1,10 @@
-package com.magistor8.anime.view.main.view_holder
+package com.magistor8.anime.ui.view.main.view_holder
 
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.magistor8.anime.domain_model.ShortData
+import com.magistor8.anime.domain.ShortData
 import kotlinx.android.synthetic.main.fragment_main_recycler_item.view.*
 
 class TestViewHolder(view: View) : RecyclerView.ViewHolder(view) {

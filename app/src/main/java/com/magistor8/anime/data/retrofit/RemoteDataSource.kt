@@ -1,15 +1,17 @@
-package com.magistor8.anime.repository.impl
+package com.magistor8.anime.data.retrofit
 
 import com.google.gson.GsonBuilder
 import com.magistor8.anime.BuildConfig
-import com.magistor8.anime.domain_model.AuthDTO
-import com.magistor8.anime.domain_model.SearchDTO
-import com.magistor8.anime.repository.abstr.AniAPI
+import com.magistor8.anime.domain.AuthDTO
+import com.magistor8.anime.domain.SearchDTO
+import io.reactivex.rxjava3.core.Single
 import retrofit2.Callback
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RemoteDataSource {
+class RemoteDataSource(rx: Boolean = false) {
+
     private val api = Retrofit.Builder()
         .baseUrl("https://api.aniapi.com/v1/")
         .addConverterFactory(
@@ -17,6 +19,7 @@ class RemoteDataSource {
                 GsonBuilder().setLenient().create()
             )
         )
+        .apply { if (rx) this.addCallAdapterFactory(RxJava3CallAdapterFactory.create()) }
         .build().create(AniAPI::class.java)
 
     fun getAuth(callback: Callback<AuthDTO>) {
@@ -25,6 +28,10 @@ class RemoteDataSource {
 
     fun search(q: String, callback: Callback<SearchDTO>) {
         api.search(q).enqueue(callback)
+    }
+
+    fun searchRX(q: String) : Single<SearchDTO>{
+        return api.searchRX(q)
     }
 
 }

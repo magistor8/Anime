@@ -1,7 +1,7 @@
 package com.magistor8.anime.data.retrofit
 
-import com.magistor8.anime.domain.AuthDTO
-import com.magistor8.anime.domain.SearchDTO
+import com.magistor8.anime.domain.entities.AuthDTO
+import com.magistor8.anime.domain.entities.SearchDTO
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Call
 import retrofit2.http.*

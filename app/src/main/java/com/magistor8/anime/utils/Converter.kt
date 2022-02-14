@@ -1,7 +1,7 @@
 package com.magistor8.anime.utils
 
-import com.magistor8.anime.domain.SearchDTO
-import com.magistor8.anime.domain.ShortData
+import com.magistor8.anime.domain.entities.SearchDTO
+import com.magistor8.anime.domain.entities.ShortData
 
 class Converter {
 

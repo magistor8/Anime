@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.magistor8.anime.R
-import com.magistor8.anime.domain.ShortData
+import com.magistor8.anime.domain.entities.ShortData
 import com.magistor8.anime.ui.view.main.view_holder.TestViewHolder
 
 class MainFragmentAdapter(

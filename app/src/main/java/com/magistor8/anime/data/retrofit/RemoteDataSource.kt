@@ -2,9 +2,10 @@ package com.magistor8.anime.data.retrofit
 
 import com.google.gson.GsonBuilder
 import com.magistor8.anime.BuildConfig
-import com.magistor8.anime.domain.AuthDTO
-import com.magistor8.anime.domain.SearchDTO
+import com.magistor8.anime.domain.entities.AuthDTO
+import com.magistor8.anime.domain.entities.SearchDTO
 import io.reactivex.rxjava3.core.Single
+import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
@@ -26,8 +27,8 @@ class RemoteDataSource(rx: Boolean = false) {
         api.authMe(BuildConfig.ANIAPI_API_KEY).enqueue(callback)
     }
 
-    fun search(q: String, callback: Callback<SearchDTO>) {
-        api.search(q).enqueue(callback)
+    fun search(q: String): Call<SearchDTO> {
+        return api.search(q)
     }
 
     fun searchRX(q: String) : Single<SearchDTO>{

@@ -1,7 +1,8 @@
 package com.magistor8.anime.domain
 
-import retrofit2.Callback
+import com.magistor8.anime.domain.entities.SearchDTO
+import io.reactivex.rxjava3.core.Single
 
 interface RemoteRepository {
-    fun getSearchList(query: String, callback: Callback<SearchDTO>)
+    fun getSearchList(query: String): Single<SearchDTO>
 }

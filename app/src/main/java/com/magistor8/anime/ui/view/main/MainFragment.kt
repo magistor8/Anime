@@ -19,12 +19,9 @@ import androidx.core.view.doOnLayout
 import com.google.android.material.textfield.TextInputLayout
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView.OnEditorActionListener
-import androidx.recyclerview.widget.RecyclerView
 import com.magistor8.anime.ui.view.viewmodel.MainFragmentContract
 import com.magistor8.anime.ui.view.viewmodel.MainFragmentContract.MyViewModel
 import com.magistor8.anime.domain.entities.ShortData
-import com.magistor8.anime.ui.view.SEARCH_RESULT
-import com.magistor8.anime.ui.view.SEARCH_RESULT_SHOW
 
 
 class MainFragment : Fragment() {
@@ -41,7 +38,10 @@ class MainFragment : Fragment() {
     private var isSearchResult = false
     private var searchData: List<ShortData> = arrayListOf()
 
-    private lateinit var viewModel: MyViewModel
+    //ViewModel
+    private val viewModel by lazy {
+        com.magistor8.anime.ui.view.viewmodel.MyViewModel()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,17 +57,11 @@ class MainFragment : Fragment() {
         val bottomView: BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation_view)
         if (bottomView.selectedItemId != R.id.bottom_main) bottomView.selectedItemId = R.id.bottom_main
 
-        //ViewModel
-        viewModel = com.magistor8.anime.ui.view.viewmodel.MyViewModel()
-
         //Адаптер
         binding.mainFragmentRecyclerView.adapter = adapter
 
         //ЛайвДата - рендер
         viewModel.viewState.observe(viewLifecycleOwner) { state -> render(state) }
-
-        //Показываем последнее состояние
-        showSavedState(savedInstanceState)
 
         //Переопределяем кнопку
         overrideBackKey(view)
@@ -125,27 +119,6 @@ class MainFragment : Fragment() {
                 return false
             }
         })
-    }
-
-    private fun showSavedState(savedInstanceState: Bundle?) {
-        if (savedInstanceState != null && savedInstanceState.getBoolean(SEARCH_RESULT_SHOW)) {
-            isSearchResult = true
-            binding.scroll.visibility = View.GONE
-            binding.mainFragmentRecyclerView.layoutParams.height =
-                RecyclerView.LayoutParams.WRAP_CONTENT
-            searchData = savedInstanceState.getParcelableArrayList(SEARCH_RESULT)!!
-            adapter.setData(searchData)
-        } else if (isSearchResult) {
-            binding.mainFragmentRecyclerView.layoutParams.height =
-                RecyclerView.LayoutParams.WRAP_CONTENT
-            binding.scroll.visibility = View.GONE
-        }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putBoolean(SEARCH_RESULT_SHOW, isSearchResult)
-        outState.putParcelableArrayList(SEARCH_RESULT, ArrayList(searchData))
     }
 
     private fun setSearchListener() {

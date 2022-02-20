@@ -9,7 +9,7 @@ import com.magistor8.anime.ui.view.setting.SettingFragment
 private const val MAIN = "MainFragment"
 private const val SETTING = "SettingFragment"
 
-object Navigation {
+class Navigation() {
 
     fun mainFragment(context : FragmentActivity, addToBS: Boolean) {
         navigate(context, MainFragment.newInstance(), R.id.container, addToBS, MAIN)

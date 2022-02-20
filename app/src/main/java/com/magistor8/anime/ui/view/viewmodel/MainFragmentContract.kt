@@ -1,7 +1,7 @@
 package com.magistor8.anime.ui.view.viewmodel
 
 import androidx.lifecycle.LiveData
-import com.magistor8.anime.domain.ShortData
+import com.magistor8.anime.domain.entities.ShortData
 
 interface MainFragmentContract {
 

@@ -1,4 +1,4 @@
-package com.magistor8.anime.domain
+package com.magistor8.anime.domain.entities
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

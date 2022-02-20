@@ -22,7 +22,7 @@ import android.widget.TextView.OnEditorActionListener
 import androidx.recyclerview.widget.RecyclerView
 import com.magistor8.anime.ui.view.viewmodel.MainFragmentContract
 import com.magistor8.anime.ui.view.viewmodel.MainFragmentContract.MyViewModel
-import com.magistor8.anime.domain.ShortData
+import com.magistor8.anime.domain.entities.ShortData
 import com.magistor8.anime.ui.view.SEARCH_RESULT
 import com.magistor8.anime.ui.view.SEARCH_RESULT_SHOW
 
@@ -63,7 +63,7 @@ class MainFragment : Fragment() {
         //Адаптер
         binding.mainFragmentRecyclerView.adapter = adapter
 
-        //ЛайвДата
+        //ЛайвДата - рендер
         viewModel.viewState.observe(viewLifecycleOwner) { state -> render(state) }
 
         //Показываем последнее состояние

@@ -48,6 +48,7 @@
         <item name="android:tint">?colorOnPrimary</item>
         <item name="srcCompat">@drawable/nophoto</item>
         <item name="android:background">@drawable/corner_outlines</item>
+        <item name="android:scaleType">centerCrop</item>
     </style>
 
     <style name="seasonChip" parent="Widget.MaterialComponents.Chip.Choice">
@@ -66,17 +67,20 @@
     </style>
 
     <style name="mainFragment_animeTitle" parent="mainFragment_animeDescription">
+        <item name="android:textColor">?mainTextColor</item>
         <item name="android:textStyle">italic</item>
         <item name="android:textSize">15sp</item>
         <item name="android:padding">@dimen/mainFragment_animeItem_padding</item>
     </style>
 
     <style name="mainFragment_animeYear" parent="mainFragment_animeDescription">
+        <item name="android:textColor">?mainTextColor</item>
         <item name="android:textStyle">bold</item>
         <item name="android:padding">@dimen/mainFragment_animeItem_padding</item>
     </style>
 
     <style name="mainFragment_animeSeasons" parent="mainFragment_animeDescription">
+        <item name="android:textColor">?mainTextColor</item>
         <item name="android:textSize">10sp</item>
         <item name="android:textStyle">italic</item>
         <item name="android:padding">@dimen/mainFragment_animeItem_padding</item>

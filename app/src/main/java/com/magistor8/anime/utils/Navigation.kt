@@ -2,10 +2,9 @@ package com.magistor8.anime.utils
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentTransaction
 import com.magistor8.anime.R
-import com.magistor8.anime.view.main.MainFragment
-import com.magistor8.anime.view.setting.SettingFragment
+import com.magistor8.anime.ui.view.main.MainFragment
+import com.magistor8.anime.ui.view.setting.SettingFragment
 
 private const val MAIN = "MainFragment"
 private const val SETTING = "SettingFragment"

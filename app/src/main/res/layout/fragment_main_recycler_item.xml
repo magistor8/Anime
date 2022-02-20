@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp">
 
-        <com.magistor8.anime.view.imageview.EquilateralImageView
+        <com.magistor8.anime.ui.view.imageview.EquilateralImageView
             style="@style/mainFragment_recycler_EquilateralImageView"
             android:id="@+id/image_view_item"
             android:layout_width="match_parent"

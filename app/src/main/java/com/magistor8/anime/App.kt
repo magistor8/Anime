@@ -2,16 +2,16 @@ package com.magistor8.anime
 
 import android.app.Application
 import android.content.Context
-import com.magistor8.anime.data.RemoteRepoImplRX
-import com.magistor8.anime.data.retrofit.RemoteDataSource
-import com.magistor8.anime.utils.Converter
-import com.magistor8.anime.utils.Navigation
+import com.magistor8.anime.di.DaggerMyComponent
+import com.magistor8.anime.di.MyModule
 
 class MyApp: Application() {
 
-    val converter = Converter()
-    val navigation = Navigation()
-    val repository = RemoteRepoImplRX(RemoteDataSource(true))
+    val di by lazy {
+        DaggerMyComponent.builder()
+            .myModule(MyModule())
+            .build()
+    }
 
     override fun onCreate() {
         super.onCreate()

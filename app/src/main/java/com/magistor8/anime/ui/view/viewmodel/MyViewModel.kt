@@ -2,17 +2,25 @@ package com.magistor8.anime.ui.view.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.magistor8.anime.MyApp
-import com.magistor8.anime.data.RemoteRepoImplRX
-import com.magistor8.anime.data.retrofit.RemoteDataSource
+import com.magistor8.anime.domain.RemoteRepository
+import com.magistor8.anime.utils.Converter
 import io.reactivex.rxjava3.kotlin.subscribeBy
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class MyViewModel : MainFragmentContract.MyViewModel {
+class MyViewModel : MainFragmentContract.MyViewModelInterface, ViewModel() {
+
+    init {
+        MyApp.instance.di.inject(this)
+    }
 
     //Репозиторий
-    private val repository = MyApp.instance.repository
+    @Inject
+    lateinit var repository : RemoteRepository
+    //Конвертер
+    @Inject
+    lateinit var converter : Converter
 
     //Лайв дата
     override val viewState: LiveData<MainFragmentContract.ViewState> = MutableLiveData()
@@ -35,7 +43,7 @@ class MyViewModel : MainFragmentContract.MyViewModel {
         repository.getSearchList(q).subscribeBy(
             onSuccess = {
                 viewState.mutable().postValue(
-                    MainFragmentContract.ViewState.SuccesShortData(MyApp.instance.converter.convertSearchDTOtoShortData(it))
+                    MainFragmentContract.ViewState.SuccesShortData(converter.convertSearchDTOtoShortData(it))
                 )
             },
             onError = {

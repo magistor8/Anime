@@ -1,6 +1,7 @@
 package com.magistor8.anime.ui.view.viewmodel
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import com.magistor8.anime.domain.entities.ShortData
 
 interface MainFragmentContract {
@@ -18,7 +19,7 @@ interface MainFragmentContract {
         data class LoadData(val q : String): Event
     }
 
-    interface MyViewModel {
+    interface MyViewModelInterface {
         val viewState: LiveData<ViewState>
         val actions: LiveData<Action>
 

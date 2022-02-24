@@ -19,9 +19,10 @@ import androidx.core.view.doOnLayout
 import com.google.android.material.textfield.TextInputLayout
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView.OnEditorActionListener
-import com.magistor8.anime.ui.view.viewmodel.MainFragmentContract
-import com.magistor8.anime.ui.view.viewmodel.MainFragmentContract.MyViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.magistor8.anime.domain.entities.ShortData
+import com.magistor8.anime.ui.view.viewmodel.MainFragmentContract
+import com.magistor8.anime.ui.view.viewmodel.MyViewModel
 
 
 class MainFragment : Fragment() {
@@ -39,8 +40,8 @@ class MainFragment : Fragment() {
     private var searchData: List<ShortData> = arrayListOf()
 
     //ViewModel
-    private val viewModel by lazy {
-        com.magistor8.anime.ui.view.viewmodel.MyViewModel()
+    private val viewModel: MyViewModel by lazy {
+        ViewModelProvider(this).get(MyViewModel::class.java)
     }
 
     override fun onCreateView(

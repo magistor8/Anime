@@ -10,16 +10,14 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class RemoteRepoImpl: RemoteRepository {
-
-    private val remoteDataSource = RemoteDataSource()
+class RemoteRepoImpl(private val remoteDataSource: RemoteDataSource): RemoteRepository {
 
     override fun getSearchList(q: String): Single<SearchDTO> {
         //Запрашиваем данные
         return remoteDataSource.search(q).toSingle()
     }
 
-    fun <T> Call<T>.toSingle(): Single<T> {
+    private fun <T> Call<T>.toSingle(): Single<T> {
         val single = SingleSubject.create<T>()
         this.enqueue(object : Callback<T> {
             override fun onFailure(call: Call<T>, t: Throwable) {

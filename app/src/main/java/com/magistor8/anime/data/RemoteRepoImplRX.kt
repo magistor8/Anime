@@ -6,9 +6,7 @@ import com.magistor8.anime.domain.entities.SearchDTO
 import io.reactivex.rxjava3.core.Single
 
 
-class RemoteRepoImplRX : RemoteRepository {
-
-    private val remoteDataSource =  RemoteDataSource(true)
+class RemoteRepoImplRX(private val remoteDataSource: RemoteDataSource) : RemoteRepository {
 
     override fun getSearchList(q: String): Single<SearchDTO> {
         //Запрашиваем данные

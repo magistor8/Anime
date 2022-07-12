@@ -10,10 +10,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.magistor8.anime.MyApp
 import com.magistor8.anime.ui.view.bottomappbar.BottomNavigationDrawerFragment
 import com.magistor8.anime.R
 import com.magistor8.anime.databinding.ActivityMainBinding
-import com.magistor8.anime.utils.Navigation
 import com.magistor8.anime.ui.view.viewpager.ViewPagerAdapter
 
 const val SETTINGS = "SETTINGS"
@@ -21,8 +21,6 @@ const val IS_VIOLET = "isViolet"
 const val IS_FIRST_LUNCH = "IS_FIRST_LUNCH"
 const val IS_APP_BAR = "IS_APP_BAR"
 const val BOTTOM_VIEW_CURRENT_ID = "BOTTOM_VIEW_CURRENT_ID"
-const val SEARCH_RESULT_SHOW = "SEARCH_RESULT_SHOW"
-const val SEARCH_RESULT = "SEARCH_RESULT"
 
 class MainActivity : AppCompatActivity() {
 
@@ -59,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         setBottomAppBar()
 
         if (savedInstanceState == null) {
-            Navigation.mainFragment(this, false)
+            MyApp.instance.navigation.mainFragment(this, false)
         }
     }
 
@@ -83,13 +81,13 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigationView.setOnItemSelectedListener {
                 when(it.itemId) {
                     R.id.bottom_main -> {
-                        Navigation.mainFragment(this, true)
+                        MyApp.instance.navigation.mainFragment(this, true)
                         return@setOnItemSelectedListener true
                     }
                     R.id.bottom_fav -> {return@setOnItemSelectedListener true}
                     R.id.bottom_profile -> {return@setOnItemSelectedListener true}
                     R.id.bottom_setting -> {
-                        Navigation.settingFragment(this, true)
+                        MyApp.instance.navigation.settingFragment(this, true)
                         return@setOnItemSelectedListener true
                     }
                     else -> {return@setOnItemSelectedListener true}
@@ -141,7 +139,7 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.app_bar_fav -> Toast.makeText(this, "Favourite", Toast.LENGTH_SHORT).show()
             R.id.app_bar_setting -> {
-                Navigation.settingFragment(this, true)
+                MyApp.instance.navigation.settingFragment(this, true)
             }
             android.R.id.home -> {
                 BottomNavigationDrawerFragment().show(this.supportFragmentManager, "tag")

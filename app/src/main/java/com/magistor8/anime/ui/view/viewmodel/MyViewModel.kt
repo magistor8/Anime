@@ -4,12 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.magistor8.anime.MyApp
 import com.magistor8.anime.data.RemoteRepoImplRX
+import com.magistor8.anime.data.retrofit.RemoteDataSource
 import io.reactivex.rxjava3.kotlin.subscribeBy
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class MyViewModel : MainFragmentContract.MyViewModel {
 
     //Репозиторий
-    private val repository = RemoteRepoImplRX()
+    private val repository = MyApp.instance.repository
 
     //Лайв дата
     override val viewState: LiveData<MainFragmentContract.ViewState> = MutableLiveData()
@@ -28,14 +31,15 @@ class MyViewModel : MainFragmentContract.MyViewModel {
 
     //Грузим данные
     private fun loadData(q: String) {
-        viewState.mutable().value = MainFragmentContract.ViewState.EmptyState
+        viewState.mutable().postValue(MainFragmentContract.ViewState.EmptyState)
         repository.getSearchList(q).subscribeBy(
             onSuccess = {
-                viewState.mutable().value =
+                viewState.mutable().postValue(
                     MainFragmentContract.ViewState.SuccesShortData(MyApp.instance.converter.convertSearchDTOtoShortData(it))
+                )
             },
             onError = {
-                viewState.mutable().value = MainFragmentContract.ViewState.Error(it)
+                viewState.mutable().postValue(MainFragmentContract.ViewState.Error(it))
             }
         )
     }
